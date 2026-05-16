@@ -10,55 +10,39 @@
 <section class="blog-section">
 	<div class="blog-container">
 		{{-- Example posts - replace with dynamic loop later --}}
-		<div class="blog-card">
-			<div class="blog-image" style="background-image:url('{{ asset('assets/images/guides.png') }}');"></div>
-			<div class="blog-content">
-				<h3>How to Prepare for Gorilla Trekking</h3>
-				<p class="blog-meta">March 10, 2026 &middot; by Admin</p>
-				<p>Discover essential advice and packing tips to ensure a successful gorilla trekking experience in Uganda's Bwindi Forest.</p>
-				<a href="#" class="blog-readmore">Read more →</a>
-			</div>
-		</div>
+		@foreach($blogs as $blog)
 
-		<div class="blog-card">
-			<div class="blog-image" style="background-image:url('{{ asset('assets/images/safari-planning.png') }}');"></div>
-			<div class="blog-content">
-				<h3>Top Wildlife Spots in Uganda</h3>
-				<p class="blog-meta">February 22, 2026 &middot; by Admin</p>
-				<p>Explore the best national parks and reserves to catch a glimpse of the Big Five and other incredible wildlife.</p>
-				<a href="#" class="blog-readmore">Read more →</a>
-			</div>
-		</div>
+			<div class="blog-card">
 
-        <div class="blog-card">
-			<div class="blog-image" style="background-image:url('{{ asset('assets/images/guides.png') }}');"></div>
-			<div class="blog-content">
-				<h3>How to Prepare for Gorilla Trekking</h3>
-				<p class="blog-meta">March 10, 2026 &middot; by Admin</p>
-				<p>Discover essential advice and packing tips to ensure a successful gorilla trekking experience in Uganda's Bwindi Forest.</p>
-				<a href="#" class="blog-readmore">Read more →</a>
-			</div>
-		</div>
+				<div class="blog-image"
+					style="background-image:url('{{ asset('storage/' . $blog->image) }}');">
+				</div>
 
-        <div class="blog-card">
-			<div class="blog-image" style="background-image:url('{{ asset('assets/images/guides.png') }}');"></div>
-			<div class="blog-content">
-				<h3>How to Prepare for Gorilla Trekking</h3>
-				<p class="blog-meta">March 10, 2026 &middot; by Admin</p>
-				<p>Discover essential advice and packing tips to ensure a successful gorilla trekking experience in Uganda's Bwindi Forest.</p>
-				<a href="#" class="blog-readmore">Read more →</a>
-			</div>
-		</div>
+				<div class="blog-content">
 
-        <div class="blog-card">
-			<div class="blog-image" style="background-image:url('{{ asset('assets/images/guides.png') }}');"></div>
-			<div class="blog-content">
-				<h3>How to Prepare for Gorilla Trekking</h3>
-				<p class="blog-meta">March 10, 2026 &middot; by Admin</p>
-				<p>Discover essential advice and packing tips to ensure a successful gorilla trekking experience in Uganda's Bwindi Forest.</p>
-				<a href="#" class="blog-readmore">Read more →</a>
+					<h3>{{ $blog->title }}</h3>
+
+					<p class="blog-meta">
+						{{ $blog->created_at->format('F d, Y') }}
+						&middot; by {{ $blog->author }}
+					</p>
+
+					<p>{{ $blog->excerpt }}</p>
+
+					<a href="{{ url('/blog/'.$blog->slug) }}" class="blog-readmore">
+						Read more →
+					</a>
+
+				</div>
+
 			</div>
-		</div>
+
+		@endforeach
+	</div>
+	<div class="blog-write" style="text-align:center; margin-top:40px;radious:8px;">
+		<a href="{{ route('blogs.create') }}" class="btn-primary">
+				Write a Blog
+			</a>
 	</div>
 </section>
 

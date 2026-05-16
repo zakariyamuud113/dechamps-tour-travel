@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    flex-direction: column;
 
     /* base background matching the example provided by user */
     background-image: url('/assets/images/bg.jpg');
@@ -9,7 +10,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-image: 
-}
+}   
 
 .logo img {
     width: 80px;

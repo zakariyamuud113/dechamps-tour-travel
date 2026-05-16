@@ -11,7 +11,7 @@
     <div class="cards">
         @foreach($destinations as $destination)
             <div class="card">
-                <div class="card-image" style="background-image: url('{{ asset('assets/images/' . $destination->image) }}');">
+                <div class="card-image" style="background-image: url('{{ asset('storage/' . $destination->image) }}');">
                     @if($destination->featured)
                         <span class="card-badge">{{ $destination->category }}</span>
                     @endif
