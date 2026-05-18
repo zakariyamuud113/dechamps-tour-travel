@@ -7,7 +7,14 @@
     <p>We're here to help plan your perfect Ugandan adventure</p>
 </section>
 
+
+
 <section class="contact-section">
+    @if(session('success'))
+            <div class="alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
     <div class="contact-wrapper">
         <!-- Contact Information -->
         <div class="contact-info-column">
@@ -64,7 +71,8 @@
                 <h3>Send us a Message</h3>
                 <p style="color: #666; margin-bottom: 25px;">Have questions? Fill out the form below and we'll get back to you within 24 hours.</p>
 
-                <form class="contact-form" id="contactForm">
+                <form id="contactForm" action="{{ route('contact.submit') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label>Full Name *</label>
                         <input type="text" name="full_name" placeholder="Your full name" required>
@@ -102,7 +110,7 @@
                         <label for="subscribe">Subscribe to our newsletter for travel tips and special offers</label>
                     </div>
 
-                    <button type="submit" class="btn-submit">Send Message</button>
+                    <button type="submit" class="btn-submit" >Send Message</button>
                 </form>
 
                 <p style="color: #999; font-size: 0.85em; margin-top: 20px; text-align: center;">
@@ -143,7 +151,7 @@
     </div>
 </section>
 
-<script>
+<!-- <script>
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -154,6 +162,6 @@
         alert('Thank you! Your message has been sent. We will contact you shortly.');
         this.reset();
     });
-</script>
+</script> -->
 
 @endsection

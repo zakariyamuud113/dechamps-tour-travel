@@ -5,6 +5,10 @@ use App\Models\Booking;
 use App\Models\Destination;
 use Illuminate\Support\Str;
 use App\Models\Blog;
+use App\Models\ContactMessage;
+use App\Models\AboutPage;
+use App\Models\Gallery;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -17,12 +21,14 @@ class AdminController extends Controller
         $destinations = Destination::count();
         $totalBookings = Booking::count();
         $totalBlogs = Blog::count();
+        $totalMessages = ContactMessage::count();
 
         return view('admin.dashboard', compact(
             'bookings',
             'destinations',
             'totalBookings',
-            'totalBlogs'
+            'totalBlogs',
+            'totalMessages'
             ));
     }
 
@@ -92,7 +98,7 @@ class AdminController extends Controller
             'best_season' => $request->best_season,
             'difficulty' => $request->difficulty,
             'highlights' => $request->highlights,
-            'featured' => $request->boolean('featured'),
+            'featured' => $request->has('featured') ? 1 : 0,
         ]);
 
         return redirect()->route('admin.destinations.index')->with('success', 'Destination created successfully');
@@ -120,6 +126,9 @@ class AdminController extends Controller
         } else {
             unset($data['image']);
         }
+
+        // featured checkbox handling
+        $data['featured'] = $request->has('featured') ? 1 : 0;
 
         $destination->update($data);
 
@@ -220,5 +229,118 @@ class AdminController extends Controller
         $blog->delete();
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog deleted successfully');
+    }
+
+
+// Admin Contact Messages Methods
+    public function contactMessages()
+    {
+        $messages = ContactMessage::latest()->get();
+
+        return view('admin.contacts.index', compact('messages'));
+    }
+
+    public function showContact($id)
+    {
+        $contact = ContactMessage::findOrFail($id);
+
+        return view('admin.contacts.show', compact('contact'));
+    }  
+    
+    public function markContactRead($id)
+    {
+        $contact = ContactMessage::findOrFail($id);
+
+        $contact->status = 'read';
+
+        $contact->save();
+
+        return back()->with('success', 'Message marked as read.');
+    }
+
+    public function deleteContact($id)
+    {
+        $contact = ContactMessage::findOrFail($id);
+
+        $contact->delete();
+
+        return back()->with('success', 'Message deleted successfully.');
+    }
+
+// Admin About Page Methods
+    public function aboutPage()
+    {
+        $about = AboutPage::first();
+
+        return view('admin.about.edit', compact('about'));
+    }
+
+    public function editAbout()
+    {
+        $about = AboutPage::first(); // single record system
+
+        return view('admin.about.edit', compact('about'));
+    }
+
+    public function updateAbout(Request $request)
+    {
+        $about = AboutPage::first();
+
+        $about->update([
+            'hero_title' => $request->hero_title,
+            'hero_subtitle' => $request->hero_subtitle,
+            'story_title' => $request->story_title,
+            'story_content' => $request->story_content,
+            'mission' => $request->mission,
+            'vision' => $request->vision,
+            'years_experience' => $request->years_experience,
+            'happy_travelers' => $request->happy_travelers,
+            'destinations_count' => $request->destinations_count,
+            'tour_guides' => $request->tour_guides,
+        ]);
+
+        return back()->with('success', 'About page updated successfully');
+    }   
+
+// Admin Gallery Methods
+    public function gallery()
+    {
+        $galleries = Gallery::latest()->get();
+        return view('admin.gallery.index', compact('galleries'));
+    }
+
+    public function createGallery()
+    {
+        return view('admin.gallery.create');
+    }
+
+    public function storeGallery(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image',
+            'title' => 'nullable|string',
+            'category' => 'nullable|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $path = $request->file('image')->store('gallery', 'public');
+
+        Gallery::create([
+            'image' => $path,
+            'title' => $request->title,
+            'category' => $request->category,
+            'description' => $request->description,
+            'featured' => $request->featured ? 1 : 0,
+        ]);
+
+        return redirect()->route('admin.gallery')->with('success', 'Image uploaded');
+    }
+
+    public function deleteGallery($id)
+    {
+        $image = Gallery::findOrFail($id);
+        $image->delete();
+
+        return back()->with('success', 'Image deleted');
     }
 }

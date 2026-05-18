@@ -12,6 +12,14 @@ body {
     background-image: 
 }   
 
+.alert-success{
+    background:#d1fae5;
+    color:#065f46;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
 .logo img {
     width: 80px;
     height: 80px;

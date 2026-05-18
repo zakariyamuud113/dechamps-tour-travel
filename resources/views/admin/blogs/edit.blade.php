@@ -23,6 +23,7 @@
     .btn-primary:hover{
         background:#1f2937;
         text-decoration:underline;
+        
     }
     .form-group{
         margin-bottom:20px;
@@ -76,6 +77,10 @@
                 </select>
             </div>
             <button type="submit" class="btn-primary">Update Blog</button>
+
+            <button class="btn-read" onclick="window.history.back(); return false;" style="background:#6b7280; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer; margin-left:10px;">
+            Back to Blogs
+        </button>
     </form>
 </div>
 @endsection

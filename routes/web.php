@@ -9,6 +9,9 @@ use App\Models\Blog;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
+use App\Models\ContactMessage;
+use App\Models\AboutPage;
 
 
 Route::get('/', function () {
@@ -88,9 +91,42 @@ Route::put('/admin/blogs/{id}', [AdminController::class, 'updateBlog'])->name('a
 
 Route::delete('/admin/blogs/{id}', [AdminController::class, 'deleteBlog'])->name('admin.blogs.delete');
 
-// APPROVAL SYSTEM
+// Blog APPROVAL SYSTEM
 Route::post('/admin/blogs/{id}/approve', [AdminController::class, 'approveBlog'])->name('admin.blogs.approve');
 Route::post('/admin/blogs/{id}/reject', [AdminController::class, 'rejectBlog'])->name('admin.blogs.reject');
+
+//Admin Contact Messages
+Route::get('/admin/contacts', [AdminController::class, 'contactMessages'])
+    ->name('admin.contacts');
+
+Route::get('/admin/contacts/{id}', [AdminController::class, 'showContact'])
+    ->name('admin.contacts.show');
+
+Route::put('/admin/contacts/{id}/read', [AdminController::class, 'markContactRead'])
+    ->name('admin.contacts.read');
+
+Route::delete('/admin/contacts/{id}', [AdminController::class, 'deleteContact'])
+    ->name('admin.contacts.delete');
+
+
+// Admin About Page Management
+Route::get('/admin/about', [AdminController::class, 'aboutPage'])->name('admin.about.index');
+Route::get('/admin/about', [AdminController::class, 'editAbout'])->name('admin.about.edit');
+
+Route::post('/admin/about', [AdminController::class, 'updateAbout'])->name('admin.about.update');
+
+
+//Admin Gallery Route
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
+
+    Route::get('/gallery/create', [AdminController::class, 'createGallery'])->name('admin.gallery.create');
+
+    Route::post('/gallery', [AdminController::class, 'storeGallery'])->name('admin.gallery.store');
+
+    Route::delete('/gallery/{id}', [AdminController::class, 'deleteGallery'])->name('admin.gallery.delete');
+});
+
 
 
 
@@ -102,7 +138,9 @@ Route::post('/blogs/submit', [BlogController::class, 'store'])->name('blogs.stor
 Route::get('/blogs', [BlogController::class, 'index'])->name('pages.blogs');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('pages.blog-details');
 
-
+//contact form route
+Route::post('/contact-submit', [ContactController::class, 'store'])
+    ->name('contact.submit');
 
 Route::view('/about', 'pages.about');
 Route::view('/destinations', 'pages.destinations');

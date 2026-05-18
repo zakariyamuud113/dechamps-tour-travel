@@ -21,7 +21,7 @@
         <div class="gallery-item {{ $gallery->category }}" data-category="{{ strtolower($gallery->category) }}">
             
             <div class="gallery-image" 
-                 style="background-image: url('{{ asset('assets/images/' . $gallery->image) }}');">
+                 style="background-image: url('{{ asset('storage/' . $gallery->image) }}');">
                 
                 <div class="gallery-overlay">
                     

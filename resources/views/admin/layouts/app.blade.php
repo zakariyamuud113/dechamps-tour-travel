@@ -101,7 +101,19 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('admin.contacts') }}" class="{{ request()->routeIs('admin.contacts') ? 'active-link' : '' }}">
+                    Contacts
+                </a>
+            </li>
+<!-- 
+            <li>
+                <a href="{{ route('admin.about.edit') }}" class="{{ request()->routeIs('admin.about.edit') ? 'active-link' : '' }}">
+                    About Page
+                </a>
+            </li> -->
+
+            <li>
+                <a href="{{ route('admin.gallery') }}" class="{{ request()->routeIs('admin.gallery') ? 'active-link' : '' }}">
                     Gallery
                 </a>
             </li>

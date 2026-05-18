@@ -1,10 +1,19 @@
+@extends('admin.layouts.app')
+@section('content')
+
 <style>
+        body{
+            font-family:Arial, sans-serif;
+            background:##f5f7fa;
+            padding:40px;
+        }
+
     .admin-form {
         display: flex;
         flex-direction: column;
         gap: 15px;
         max-width: 500px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .admin-form input[type="text"],
@@ -21,6 +30,9 @@
         border-radius: 6px;
         border: none;
         cursor: pointer;
+    }
+    .admin-form button:hover {
+        background: #0cf07a;
     }
 </style>
 
@@ -51,3 +63,5 @@
 
     <button type="submit">Update</button>
 </form>
+
+@endsection

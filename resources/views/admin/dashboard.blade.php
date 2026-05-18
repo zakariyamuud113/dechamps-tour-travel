@@ -73,6 +73,11 @@
                 <p>{{ $totalBlogs }}</p>
             </div>
 
+            <div class="stat-card">
+                <h3>Total Messages</h3>
+                <p>{{ $totalMessages }}</p>
+            </div>
+
         </div>
 </div>
 
