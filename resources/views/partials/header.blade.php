@@ -1,12 +1,17 @@
 <header class="navbar">
+
     <div class="logo">
-        <!-- LOGO PLACEHOLDER -->
-        <h6>
         <img src="{{ asset('assets/images/dechampslogo.png') }}" alt="Company Logo">
-        </h6>
     </div>
 
-    <nav>
+    <!-- HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav id="navMenu">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/destinations">Destinations</a></li>
@@ -16,10 +21,17 @@
             <li><a href="/about">About</a></li>
             <li><a href="/blogs">Blogs</a></li>
             <li><a href="/contact">Contact</a></li>
+
+            <!-- BOOK NOW INSIDE MENU -->
+            <li class="mobile-book">
+                <a href="/booking" class="btn">Book Now</a>
+            </li>
         </ul>
     </nav>
 
-    <div class="cta">
+    <!-- DESKTOP BUTTON -->
+    <div class="cta desktop-btn">
         <a href="/booking" class="btn">Book Now</a>
     </div>
+
 </header>

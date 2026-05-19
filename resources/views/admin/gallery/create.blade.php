@@ -51,8 +51,8 @@
                     <input type="text" name="title" placeholder="Title" class="input">
                     <select name="category" class="input">
                         <option value="">Select Category</option>
-                        <option value="Cultural Experience">Cultural Experience</option>
-                        <option value="Landscape">Landscape</option>
+                        <option value="Culture">Cultural Experiences</option>
+                        <option value="Landscapes">Landscapes</option>
                         <option value="Wildlife">Wildlife</option>
                     </select>
                     <input type="text" name="description" placeholder="Description" class="input">

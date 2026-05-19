@@ -16,7 +16,7 @@
 
                 <!-- IMAGE -->
                 <div class="card-image" 
-                    style="background-image: url('{{ asset('assets/images/' . $destination->image) }}');">
+                    style="background-image: url('{{ asset('storage/' . $destination->image) }}');">
 
                     <!-- CATEGORY BADGE -->
                     <span class="card-badge">
@@ -75,9 +75,7 @@
             </div>
         @endforeach
     </div>
-    
 
-    
 
     <h2>Testimonials</h2>
     <p style="text-align: center;">Hear from our satisfied travelers about their unforgettable experiences with us.</p>

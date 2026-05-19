@@ -117,7 +117,7 @@ Route::post('/admin/about', [AdminController::class, 'updateAbout'])->name('admi
 
 
 //Admin Gallery Route
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('web')->group(function () {
     Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
 
     Route::get('/gallery/create', [AdminController::class, 'createGallery'])->name('admin.gallery.create');
